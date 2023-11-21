@@ -1,0 +1,17 @@
+sudo systemctl start mongod
+
+mongosh
+
+show dbs
+
+db.Sumit.insertOne({"Name":"Sagar", "Surname":"Jagtap","Id":14})
+
+db.Sumit. insertMany([{"Name": "Pratap", "Surname": "Kure"},{"Name":"Narayan","Surname":"Nara" }])
+
+db.Sumit.updateOne({"Name":"Narayan"}, {$set:{"Surname: Jagtap }})
+
+db.Sumit.remove({"Surname": "Kure"})
+
+db.Sumit.findOne({"Name":"Narayan"}) 
+
+db.Sumit.drop()

@@ -1,0 +1,145 @@
+Daminidb> db.CreateCollection(Students)
+ReferenceError: Students is not defined
+
+Daminidb> db.CreateCollection('Students')
+TypeError: db.CreateCollection is not a function
+
+Daminidb> db.createCollection('Students')
+{ ok: 1 }
+
+Daminidb> show collections;
+Students
+Daminidb> db.createCollection('Teachers')
+{ ok: 1 }
+Daminidb> show collections;
+Students
+Daminidb> Students.insertOne({Std_ID : 1, First_Name : "Damini", Last_Daminidb>
+Students.insertOne({Std_ID : 1, First_Name : "Damini", Last_Name : "Rajput", Roll_No: 01, Department: "IT",
+Admission_Date: Date("<2021-12-16>")})
+ReferenceError: Students is not defined
+Daminidb> Daminidb.Students.insertOne({Std_ID : 1, First_Name : "Damini", Last_Name : "Rajput", Roll_No:
+01, Department: "IT", Admission_Date: Date("<2021-12-16>")})
+ReferenceError: Daminidb is not defined
+Daminidb> show collections;
+Students
+Teachers
+Daminidb> Daminidb.Students.insertOne({Std_ID : 1, First_Name : "Damini", Last_Name : "Rajput", Roll_No:
+01, Department: "IT", Admission_Date: Date("<2021-12-16>")})
+ReferenceError: Daminidb is not defined
+Daminidb> db.Students.insertOne({Std_ID : 1, First_Name : "Damini", Last_Name : "Rajput", Roll_No: 01,
+Department: "IT", Admission_Date: Date("<2021-12-16>")})
+{
+acknowledged: true,
+insertedId: ObjectId("6507f0bf6d7684e17b047a5c")
+}
+Daminidb> db.Students.insertMany([{}])
+{
+acknowledged: true,
+insertedIds: { '0': ObjectId("6507f1556d7684e17b047a5d") }
+}
+Daminidb> db.Students.insertMany([{{Std_ID : 2, First_Name : "Shivanya", Last_Name : "Rathi", Roll_No:
+02, Department: "IT", Admission_Date: Date("<2021-12-16>")}}])
+Uncaught:
+SyntaxError: Unexpected token (1:25)
+> 1 | db.Students.insertMany([{{Std_ID : 2, First_Name : "Shivanya", Last_Name : "Rathi", Roll_No: 02,
+Department: "IT", Admission_Date: Date(Daminidb> db.Students.insertMany([{Std_ID : 2, First_Name :
+"Shivanya", Last_Name : "Rathi", Roll_No: 02, Department: "IT", Admission_Date: Date("<2021-12-16>")},
+{Std_ID : 2, First_Name : "Shivanya", Last_Name : "Rathi", Roll_No: 02, Department: "IT", Admission_Date:
+Date("<2021-12-17>")}, {Std_ID : 3, First_Name : "Abhimanyu", Last_Name : "Ahuja", Roll_No: 03,
+Department: "IT", Admission_Date: Date("<2021-12-16>")}, {Std_ID : 4, First_Name : "Avanti", Last_Name :
+"Arya", Roll_No: 04, Department: "IT", Admission_Date: Date("<2021-12-16>")}])
+{
+acknowledged: true,
+insertedIds: {
+'0': ObjectId("6507f2a36d7684e17b047a5e"),
+'1': ObjectId("6507f2a36d7684e17b047a5f"),
+'2': ObjectId("6507f2a36d7684e17b047a60"),
+'3': ObjectId("6507f2a36d7684e17b047a61")
+}
+Daminidb> db.Students.insertOne({Std_ID : 5, First_Name : "Naina", Last_Name : "Rathod", Roll_No: 05,
+Department: "IT", Admission_Date: Date("<2021-12-17>")})
+{
+acknowledged: true,
+insertedId: ObjectId("6507f3e96d7684e17b047a62")
+}
+Daminidb> db.Students.find();
+[
+{
+_id: ObjectId("6507f0bf6d7684e17b047a5c"),
+Std_ID: 1,
+First_Name: 'Damini',
+Last_Name: 'Rajput',
+Roll_No: 1,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:09:59 GMT+0530 (India Standard Time)'
+},
+{ _id: ObjectId("6507f1556d7684e17b047a5d") },
+{
+_id: ObjectId("6507f2a36d7684e17b047a5e"),
+Std_ID: 2,
+First_Name: 'Shivanya',
+Last_Name: 'Rathi',
+Roll_No: 2,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:18:03 GMT+0530 (India Standard Time)'
+},
+{
+_id: ObjectId("6507f2a36d7684e17b047a5f"),
+Std_ID: 2,
+First_Name: 'Shivanya',
+Last_Name: 'Rathi',
+Roll_No: 2,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:18:03 GMT+0530 (India Standard Time)'
+},
+{
+_id: ObjectId("6507f2a36d7684e17b047a60"),
+Std_ID: 3,
+First_Name: 'Abhimanyu',
+Last_Name: 'Ahuja',
+Roll_No: 3,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:18:03 GMT+0530 (India Standard Time)'
+},
+{
+_id: ObjectId("6507f2a36d7684e17b047a61"),
+Std_ID: 4,
+First_Name: 'Avanti',
+Last_Name: 'Arya',
+Roll_No: 4,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:18:03 GMT+0530 (India Standard Time)'
+},
+{
+_id: ObjectId("6507f3e96d7684e17b047a62"),
+Std_ID: 5,
+First_Name: 'Naina',
+Last_Name: 'Rathod',
+Roll_No: 5,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:23:29 GMT+0530 (India Standard Time)'
+}
+]
+Daminidb> db.Students.findOne();
+{
+_id: ObjectId("6507f0bf6d7684e17b047a5c"),
+Std_ID: 1,
+First_Name: 'Damini',
+Last_Name: 'Rajput',
+Roll_No: 1,
+Department: 'IT',
+Admission_Date: 'Mon Sep 18 2023 12:09:59 GMT+0530 (India Standard Time)'
+}
+Daminidb> db.Students.find({}, {First_Name:1,Last_Name:1})
+[
+{
+_id: ObjectId("6507f0bf6d7684e17b047a5c"),
+First_Name: 'Damini',
+Last_Name: 'Rajput'
+},
+{ _id: ObjectId("6507f1556d7684e17b047a5d") },
+{
+_id: ObjectId("6507f2a36d7684e17b047a5e"),
+First_Name: 'Shivanya',
+Last_Name: 'Rathi'
+}

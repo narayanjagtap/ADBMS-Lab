@@ -1,0 +1,46 @@
+test> db.createCollection("orders")
+{ ok: 1 }
+test> db.order.insert({cust_id:"A123", amount:500, status:"A"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("6544a08fec03a1494643be50") }
+}
+test> db.order.insert({cust_id:"A123", amount:250, status:"A"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("6544a0a1ec03a1494643be51") }
+}
+test> db.order.insert({cust_id:"B212", amount:200, status:"A"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("6544a0b2ec03a1494643be52") }
+}
+test> db.order.insert({cust_id:"A123", amount:300, status:"d"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("6544a0c5ec03a1494643be53") }
+}
+
+
+test> var mapFunction1 = function() {emit(this.cust_id, this.amount)};
+
+test> var reduceFunction1 = function(key, values)
+... {return Array.sum(values);};
+
+test> db.order.mapReduce(mapFunction1, reduceFunction1,{query:{status:"A"},out:"order_totals"});
+DeprecationWarning: Collection.mapReduce() is deprecated. Use an aggregation instead.
+See https://docs.mongodb.com/manual/core/map-reduce for details.
+test> db.orders.mapReduce(Map Function-> function() {emit(this.cust_id,thus.amount);},)
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:24)
+
+> 1 | db.orders.mapReduce(Map Function-> function() {emit(this.cust_id,thus.amount);},)
+    |                         ^
+  2 |
+
+
+
+test> db.orders.find();db.order_totals.find();
+[ { _id: 'B212', value: 400 }, { _id: 'A123', value: 1500 } ]
+test>
